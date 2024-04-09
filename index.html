@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+  <div id="repBody">
+    <div id="inputBoxes">
+      <h1 style="color: white; font-family: monospace; font-size: 50px;">TrashOS</h1>
+      <form style="display: flex; flex-direction: column;">
+        <label for="user" style="color: white; font-family: monospace;">User</label>
+        <input type="text" id="username" name="user" style="margin-bottom: 10px;"/>
+        <label for="pass" style="color: white; font-family: monospace;">Pass</label>
+        <input type="password" id="password" name="pass">
+      </form>
+    </div>
+  </div>
+  <div id="desktopbackground" style="display: none; width: 100vw; height: 100vh; align-items: center; justify-content: center; z-index: 0; position: fixed;">
+    <h1 style="color:white; font-size: 100px; caret-color: transparent; align-self: center; justify-self: center;">TRASH OS</h1>
+  </div>
+  <div style="z-index: 1; width: 100vw; height: 100vh; position: fixed; display: flex;">
+    <div style="width: 400px; height: 400px; display: flex; flex-direction: column;">
+      <img src="img/desktop/trash.png" style="width: 60px; height: 60px; margin-left: 20px; margin-top: 30px; cursor: pointer;">
+      <input type="image" id='snakeI' src="img/desktop/snake.gif" style="width: 60px; height: 60px; margin-left: 20px; margin-top: 30px; cursor: pointer;">
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <div id="windowcontainer" style="display: none; width: 100vw; height: 100vh; z-index: 1; position: fixed; min-height: 100vh;">
+    <div id="navbar" style="background-color: rgb(218, 218, 218); width: 60vw; height: 4vh; display: flex; justify-content: right; border-style: solid; border-color: rgb(210, 151, 255); border-width: 1px;">
+      <div style="height: 4vh; width: 2vw; background-color: rgb(221, 32, 32); border-style: solid; border-color: rgb(210, 151, 255); border-width: 1px;""></div>
+    </div>
+    <canvas id="windowmain" style="width: 60vw; height: 80vh; background-color: rgb(220, 220, 220); border-style: solid; border-color: rgb(210, 151, 255); border-width: 1px; position: fixed;"></canvas>
+  </div>
+</body>
+</html>
