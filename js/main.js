@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let mainsnake;
   let canvas = document.querySelector('canvas');
   let c = canvas.getContext('2d');
-  
+  let navbar = document.getElementById('navbar')
+  let exnavbar = document.getElementById('exnavbar')
 
   document.addEventListener('keydown', function(event) {
     if (event.key == 'Enter') {
@@ -128,6 +129,24 @@ document.addEventListener('DOMContentLoaded', function() {
       if (this.down) {
         this.y += 5
       }
+
+      if (this.x > canvas.width + this.squarelength) {
+        this.x = 0 - this.squarelength
+      }
+      if (this.x + this.squarelength < 0) {
+        this.x = canvas.width + this.squarelength
+      }
+      if (this.y > canvas.height + this.squarelength) {
+        this.y = 0 - this.squarelength
+      }
+      if (this.y < 0 - this.squarelength) {
+        this.y = canvas.height + this.squarelength;
+      }
+
+      if ((this.applex < this.x + 20) && (this.x - 20 < this.appplex)) {
+        this.stick()
+      }
+
     this.stick = function() {
       this.applex = this.x
       this.appley = this.y
@@ -140,11 +159,61 @@ document.addEventListener('DOMContentLoaded', function() {
   
   }
 
+  let navclicked = false
+  let clickpos = []
+  navbar.addEventListener('click', function(event) {
+    if (game == 'snake') {
+    switch (navclicked) {
+      case true: {
+        navclicked = false
+        break;
+      } case false: {
+        navclicked = true;
+        break;
+      }
+    }
+    }
+    clickpos.push(event.x)
+    clickpos.push(event.y)
+    document.addEventListener('mousemove', function(event) {
+      clickpos[0] = event.x
+      clickpos[1] = event.y
+    })
+  })
+  function navmove() {
+    if (navclicked) {
+    navbar.style.left = clickpos[0] - 20 + "px";
+    navbar.style.top = clickpos[1] -10 + "px";
+    canvas.style.left = clickpos[0] - 20 + "px";
+    canvas.style.top  = clickpos[1] + 30 + "px";
+
+    }
+  }
+
+  exnavbar.addEventListener('click', function() {
+    if (game == 'snake') {
+    cancelAnimationFrame(animationID)
+    windowcontainer.style.display = 'none';
+    }
+  })
+  
+  function placeNav() {
+    if (game == 'snake') {
+      navbar.width = "400px"
+      exnavbar.width = navbar.width
+      navbar.height = canvas.height/6
+      exnavbar.height = navbar.height
+      navbar.style.marginBottom = "350px"
+    } 
+  }
+  let animationID;
   function animate() {
-    requestAnimationFrame(animate);
+    animationID = requestAnimationFrame(animate);
     c.clearRect(0,0,canvas.width, canvas.height)
-    canvas.width = window.innerWidth * 0.6;
-    canvas.height = window.innerHeight * 0.8;
+    canvas.width = mainsnake.squarelength * 20
+    canvas.height = mainsnake.squarelength * 15
+    placeNav()
+    navmove()
     
     mainsnake.draw()
     
